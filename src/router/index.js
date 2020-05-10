@@ -1,17 +1,23 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import TakeQuiz from '../views/TakeQuiz.vue'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
   },
   {
-    path: '/about',
+    path: '/takequiz/:id',
+    name: 'TakeQuiz',
+    component: TakeQuiz
+  },
+  {
+    path: '/quizeditor',
     name: 'About',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
