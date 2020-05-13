@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+    <h2>Test your knowledge</h2>
+    <h4>Take one of the following quiz</h4>
     <ShowQuizList />
   </div>
 </template>
@@ -15,3 +17,10 @@ export default {
   }
 };
 </script>
+<style scroped>
+.home {
+  width: 60%;
+  display: inline-block;
+  text-align: left;
+}
+</style>
