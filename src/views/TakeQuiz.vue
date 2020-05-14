@@ -8,37 +8,7 @@
       <button @click="startQuiz">Start</button>
     </div>
     <div v-show="quizStarted===true">
-      <div class="questions" v-for="(question,qindex) in quiz.questions" :key="question.id">
-        <div class="question" v-show="question.visible===true">
-          <h3 class="text">{{qindex +1}}{{" - "}}{{question.text}}</h3>
-          <div class="options" v-for="(option) in question.options" :key="option.id">
-            <div v-if="question.type=='multi'" class="option">
-              <label :for="option.id">
-                <input
-                  type="checkbox"
-                  :name="option.id"
-                  :id="option.id"
-                  v-model="question.answerByUser"
-                  :value="option.id"
-                />
-                {{option.value}}
-              </label>
-            </div>
-            <div v-if="question.type=='single'" class="option">
-              <label :for="option.id">
-                <input
-                  type="radio"
-                  :name="question.id"
-                  :id="option.id"
-                  v-model="question.answerByUser"
-                  :value="option.id"
-                />
-                {{option.value}}
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
+      <RenderQuestions :quiz="quiz"></RenderQuestions>
       <div class="nav-question-button">
         <button v-show="showPreviousButton" @click="goToPreviousQuestion">Previous question</button>
         <button v-show="showNextBotton" @click="goToNextQuestion">Next question</button>
@@ -49,7 +19,11 @@
 </template>
 
 <script>
+import RenderQuestions from "@/components/RenderQuestions.vue";
 export default {
+  components: {
+    RenderQuestions
+  },
   data() {
     return {
       quiz: {},
@@ -65,12 +39,6 @@ export default {
     if (this.totalQuestions > 0) {
       quiz.questions.forEach(question => {
         question.visible = false;
-        if (question.type == "single") {
-          question.answerByUser = [];
-        }
-        if (question.type == "multi") {
-          question.answerByUser = [];
-        }
       });
       quiz.questions[0].visible = true;
     }
