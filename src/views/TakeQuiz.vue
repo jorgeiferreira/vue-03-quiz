@@ -8,10 +8,10 @@
       <button @click="startQuiz">Start</button>
     </div>
     <div v-show="quizStarted===true">
-      <RenderQuestions :quiz="quiz"></RenderQuestions>
+      <RenderQuestions :questions="quiz.questions" :currentQuestion="currentQuestion"></RenderQuestions>
       <div class="nav-question-button">
-        <button v-show="showPreviousButton" @click="goToPreviousQuestion">Previous question</button>
-        <button v-show="showNextBotton" @click="goToNextQuestion">Next question</button>
+        <button :disabled="disablePreviousButton" @click="goToPreviousQuestion">Previous question</button>
+        <button :disabled="disableNextBotton" @click="goToNextQuestion">Next question</button>
         <button>Finish</button>
       </div>
     </div>
@@ -36,20 +36,14 @@ export default {
     var quizId = this.$route.params.id;
     var quiz = this.$store.getters.getQuizById(quizId);
     this.totalQuestions = quiz.questions.length;
-    if (this.totalQuestions > 0) {
-      quiz.questions.forEach(question => {
-        question.visible = false;
-      });
-      quiz.questions[0].visible = true;
-    }
     this.quiz = quiz;
   },
   computed: {
-    showPreviousButton: function() {
-      return this.currentQuestion > 0;
+    disablePreviousButton: function() {
+      return this.currentQuestion <= 0;
     },
-    showNextBotton: function() {
-      return this.currentQuestion < this.totalQuestions - 1;
+    disableNextBotton: function() {
+      return this.currentQuestion >= this.totalQuestions - 1;
     }
   },
   methods: {
@@ -57,14 +51,10 @@ export default {
       this.quizStarted = true;
     },
     goToPreviousQuestion: function() {
-      this.quiz.questions[this.currentQuestion].visible = false;
       this.currentQuestion = this.currentQuestion - 1;
-      this.quiz.questions[this.currentQuestion].visible = true;
     },
     goToNextQuestion: function() {
-      this.quiz.questions[this.currentQuestion].visible = false;
       this.currentQuestion = this.currentQuestion + 1;
-      this.quiz.questions[this.currentQuestion].visible = true;
     }
   }
 };
