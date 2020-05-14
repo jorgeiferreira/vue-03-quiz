@@ -11,7 +11,7 @@
       <RenderQuestions :questions="quiz.questions" :currentQuestion="currentQuestion"></RenderQuestions>
       <div class="nav-question-button">
         <button :disabled="disablePreviousButton" @click="goToPreviousQuestion">Previous question</button>
-        <button :disabled="disableNextBotton" @click="goToNextQuestion">Next question</button>
+        <button :disabled="disableNextButton" @click="goToNextQuestion">Next question</button>
         <button>Finish</button>
       </div>
     </div>
@@ -42,7 +42,7 @@ export default {
     disablePreviousButton: function() {
       return this.currentQuestion <= 0;
     },
-    disableNextBotton: function() {
+    disableNextButton: function() {
       return this.currentQuestion >= this.totalQuestions - 1;
     }
   },
