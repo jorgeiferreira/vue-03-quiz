@@ -7,7 +7,7 @@
             type="checkbox"
             :name="option.id"
             :id="option.id"
-            v-model="question.answerByUser"
+            v-model="answer"
             :value="option.id"
           />
           {{option.value}}
@@ -20,8 +20,15 @@
 <script>
 export default {
   props: ["question"],
-  mounted() {
-    this.question.answerByUser = [];
+  data() {
+    return {
+      answer: []
+    };
+  },
+  watch: {
+    answer(newValue) {
+      this.question.answerByUser = newValue.slice();
+    }
   }
 };
 </script>
