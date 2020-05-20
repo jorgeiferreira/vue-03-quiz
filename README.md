@@ -1,4 +1,12 @@
 # vue-03-quiz
+# Description
+- Let a person take a quiz
+
+# vuejs features use
+- routes
+- Vuex
+- Show how to call componen dynamically
+- Basic animate.css
 
 ## Project setup
 ```
