@@ -1,10 +1,13 @@
 <template>
-  <div>
-    <div class="questions" v-for="(question,qindex) in questions" :key="question.id">
-      <div class="question" v-show="currentQuestion==qindex">
-        <h3 class="text">{{qindex+1}}{{" - "}}{{question.text}}</h3>
-        <component :is="'RenderOption'+question.type" :question="question"></component>
-      </div>
+  <div class="questions">
+    <div
+      class="question"
+      v-for="(question,qindex) in questions"
+      :key="question.id"
+      v-show="currentQuestion==qindex"
+    >
+      <h3 class="text">{{qindex+1}}{{" - "}}{{question.text}}</h3>
+      <component :is="'RenderOption'+question.type" :question="question"></component>
     </div>
   </div>
 </template>
@@ -22,4 +25,7 @@ export default {
 </script>
 
 <style scoped>
+.question {
+  display: inline-grid;
+}
 </style>

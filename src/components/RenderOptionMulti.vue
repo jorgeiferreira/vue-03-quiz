@@ -1,18 +1,16 @@
 <template>
-  <div>
-    <div class="options" v-for="(option) in question.options" :key="option.id">
-      <div class="option">
-        <label :for="option.id">
-          <input
-            type="checkbox"
-            :name="option.id"
-            :id="option.id"
-            v-model="answer"
-            :value="option.id"
-          />
-          {{option.value}}
-        </label>
-      </div>
+  <div class="options">
+    <div class="option" v-for="(option) in question.options" :key="option.id">
+      <label :for="option.id">
+        <input
+          type="checkbox"
+          :name="option.id"
+          :id="option.id"
+          v-model="answer"
+          :value="option.id"
+        />
+        {{option.value}}
+      </label>
     </div>
   </div>
 </template>
