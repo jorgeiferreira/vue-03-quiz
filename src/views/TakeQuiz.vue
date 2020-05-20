@@ -12,7 +12,12 @@
       <button @click="startQuiz">Start</button>
     </div>
     <div v-show="quizStarted===true">
-      <RenderQuestions :questions="quiz.questions" :currentQuestion="currentQuestion"></RenderQuestions>
+      <RenderQuestions
+        :questions="quiz.questions"
+        :currentQuestion="currentQuestion"
+        :enterClass="enterClass"
+        :leaveClass="leaveClass"
+      ></RenderQuestions>
       <div class="nav-question-button">
         <button :disabled="disablePreviousButton" @click="goToPreviousQuestion">Previous question</button>
         <button :disabled="disableNextButton" @click="goToNextQuestion">Next question</button>
@@ -36,7 +41,9 @@ export default {
       totalQuestions: 0,
       score: 0,
       result: "",
-      reviewModeOn: false
+      reviewModeOn: false,
+      enterClass: "",
+      leaveClass: ""
     };
   },
   mounted: function() {
@@ -58,9 +65,13 @@ export default {
       this.quizStarted = true;
     },
     goToPreviousQuestion: function() {
+      this.enterClass = "animate__animated animate__bounceInRight";
+      this.leaveClass = "animate__animated animate__bounceOutLeft";
       this.currentQuestion = this.currentQuestion - 1;
     },
     goToNextQuestion: function() {
+      this.enterClass = "animate__animated animate__bounceInLeft";
+      this.leaveClass = "animate__animated animate__bounceOutRight";
       this.currentQuestion = this.currentQuestion + 1;
     },
     finishQuiz: function() {
